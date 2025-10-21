@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TV Series</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="app-header" role="banner">
+      <div class="container header-inner">
+        <div class="brand" aria-label="TV Series">
+          <span class="logo" aria-hidden="true">TV</span>
+          <span class="brand-title">TV Series</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="container" role="main">
+      <section class="table-card" aria-labelledby="series-heading">
+        <h1 id="series-heading" class="visually-hidden">TV Series List</h1>
+        <table class="series-table" aria-describedby="avg-desc">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Channel</th>
+              <th scope="col">Seasons</th>
+            </tr>
+          </thead>
+          <tbody id="series-body"></tbody>
+        </table>
+
+        <p id="avg-desc" class="average">
+          <span class="label">Seasons average:</span>
+          <span id="average" class="value">—</span>
+        </p>
+      </section>
+    </main>
+
+    <!-- IMPORTANT: Use the compiled JS output (TS -> JS). app.ts imports ./data.js and ./Serie.js -->
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
