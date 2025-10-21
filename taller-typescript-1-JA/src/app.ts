@@ -1,48 +1,30 @@
+
 import { series } from './data.js';
 import { Serie } from './Serie.js';
 
-const tbody: HTMLElement | null = document.getElementById('series-body');
-const avgSpan: HTMLElement | null = document.getElementById('average');
+const tbody = document.querySelector<HTMLTableSectionElement>('#series-body')!;
+const avgEl = document.querySelector<HTMLSpanElement>('#average')!;
 
-function renderTable(items: Serie[]): void {
-  if (!tbody) return;
-
-  for (const s of items) {
-    const tr = document.createElement('tr');
-
-    const tdId = document.createElement('td');
-    tdId.textContent = String(s.id);
-
-    const tdName = document.createElement('td');
-    tdName.textContent = s.name;
-
-    const tdChannel = document.createElement('td');
-    tdChannel.textContent = s.channel;
-
-    const tdSeasons = document.createElement('td');
-    tdSeasons.textContent = String(s.seasons);
-
-    tr.appendChild(tdId);
-    tr.appendChild(tdName);
-    tr.appendChild(tdChannel);
-    tr.appendChild(tdSeasons);
-    tbody.appendChild(tr);
-  }
+function renderTable(items: Serie[]) {
+  tbody.innerHTML = items
+    .map(
+      (s) => `
+      <tr>
+        <td>${s.id}</td>
+        <td><a href="${s.link}" target="_blank" rel="noopener">${s.name}</a></td>
+        <td>${s.channel}</td>
+        <td>${s.seasons}</td>
+      </tr>`
+    )
+    .join('');
 }
 
-function getAverageSeasons(items: Serie[]): number {
+function getAverageSeasons(items: Serie[]) {
   if (items.length === 0) return 0;
-  let total = 0;
-  for (const s of items) {
-    total = total + s.seasons;
-  }
-  return Math.round((total / items.length) * 100) / 100;
-}
-
-function renderAverage(avg: number): void {
-  if (!avgSpan) return;
-  avgSpan.textContent = String(avg);
+  const total = items.reduce((acc, s) => acc + s.seasons, 0);
+  
+  return Math.round(total / items.length);
 }
 
 renderTable(series);
-renderAverage(getAverageSeasons(series));
+avgEl.textContent = String(getAverageSeasons(series));
