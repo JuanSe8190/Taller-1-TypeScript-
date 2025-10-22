@@ -29,3 +29,24 @@ thead th{
 tbody tr:nth-child(even){
   background: #f7f7f7;
 }
+
+
+.content{
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+  align-items: start;
+}
+
+
+#series tbody tr{
+  cursor: pointer;
+}
+
+
+#detail img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
